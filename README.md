@@ -46,7 +46,9 @@ For more information on structure and contents of ESP-IDF projects, please refer
 
 * Download and install ESP IDF
 
-* Clone Omnic test project and set target
+* Clone Omnic or download test project
+
+* Navigate to project folder and set target:
     ```
     cd ~/omnic_test
     idf.py set-target esp32
