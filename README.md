@@ -44,13 +44,13 @@ For more information on structure and contents of ESP-IDF projects, please refer
 ## Build and flash
 * Please check vendor get started guide: [ESP-IDF Get Started](https://docs.espressif.com/projects/esp-idf/en/v5.1.2/esp32/get-started)
 
-* Download and install ESP IDF
+* Download and install ESP IDF v5.12. Follow vendor get started guide to configure and install ESP-IDF for your system.
 
-* Clone Omnic or download test project
+* Clone Omnic or download omnic test project.
 
-* Navigate to project folder and set target:
+* Navigate to project folder and set target(ESP32 DEVKIT V1 by default):
     ```
-    cd ~/omnic_test
+    cd omnic_test
     idf.py set-target esp32
     ```
 
