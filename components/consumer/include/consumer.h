@@ -21,8 +21,7 @@ void Consumer(void *arg);
 
 
 /**
- * @brief Function for register task handle, pointer to queue 
- * @arg   consumer_handle_ptr  - pointer to consumer task 
+ * @brief Function for register pointer to queue 
  * @arg   queue_handle_ptr     - pointer to queue 
  */
 void Consumer_init(

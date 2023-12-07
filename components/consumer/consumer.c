@@ -7,7 +7,7 @@
 
 static const char *TAG = "Consumer";
 
-static QueueHandle_t* queueHandle        = NULL;
+static QueueHandle_t*   queueHandle_ptr = NULL;
 static gptimer_handle_t gptimer         = NULL;
 
 
@@ -36,7 +36,7 @@ void Consumer_init(QueueHandle_t* queue_handle_ptr)
   ESP_ERROR_CHECK(queue_handle_ptr == NULL);  
 
   //register queue handle
-  queueHandle = queue_handle_ptr;
+  queueHandle_ptr = queue_handle_ptr;
 
   // setup timer 
   consumer_timer_init();
@@ -52,7 +52,7 @@ void Consumer(void *arg)
   for( ;; )
     {
       // wait for messages in queue
-      xQueueReceive( (*queueHandle), &(recived_value), portMAX_DELAY);
+      xQueueReceive( (*queueHandle_ptr), &(recived_value), portMAX_DELAY);
 
       ESP_ERROR_CHECK(gptimer_get_raw_count(gptimer, &timestamp));
       ESP_ERROR_CHECK(gptimer_set_raw_count(gptimer, 0));

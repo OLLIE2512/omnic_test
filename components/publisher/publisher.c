@@ -5,9 +5,9 @@
 #define INC_PERIOD_SEC     5
 #define QUEUE_TICK_TO_WAIT 100
 
-static TaskHandle_t*  publisherTaskHandle = NULL;
-static QueueHandle_t* queueHandle = NULL;
-static gptimer_handle_t gptimer = NULL;
+static TaskHandle_t*      publisherTaskHandle_ptr = NULL;
+static QueueHandle_t*     queueHandle_ptr         = NULL;
+static gptimer_handle_t   gptimer = NULL;
 
 
 //************************************************************************************************************
@@ -28,10 +28,10 @@ static bool IRAM_ATTR timer_group_isr_callback(
                                               )
 {
     BaseType_t xHigherPriorityTaskWoken;
-    ESP_ERROR_CHECK((*publisherTaskHandle) == NULL);
+    ESP_ERROR_CHECK((*publisherTaskHandle_ptr) == NULL);
 
     xTaskNotifyFromISR(
-                        (*publisherTaskHandle),
+                        (*publisherTaskHandle_ptr),
                         0,                      /* no value needed, just notify */  
                         eNoAction,
                         &xHigherPriorityTaskWoken 
@@ -82,10 +82,10 @@ void Publisher_init(TaskHandle_t* publisher_handle_ptr, QueueHandle_t* queue_han
   ESP_ERROR_CHECK(queue_handle_ptr == NULL);  
 
   // register task handle
-  publisherTaskHandle = publisher_handle_ptr;
+  publisherTaskHandle_ptr = publisher_handle_ptr;
 
   //register queue handle
-  queueHandle = queue_handle_ptr;
+  queueHandle_ptr = queue_handle_ptr;
 
   //setup timer
   publisher_timer_init();
@@ -106,6 +106,6 @@ void Publisher(void *arg)
       incCounterValue(&cnt);
       
       // put new value of counter in queue
-      ESP_ERROR_CHECK(xQueueSendToBack((*queueHandle), &cnt, (TickType_t)QUEUE_TICK_TO_WAIT) != pdPASS);
+      ESP_ERROR_CHECK(xQueueSendToBack((*queueHandle_ptr), &cnt, (TickType_t)QUEUE_TICK_TO_WAIT) != pdPASS);
     }
 }
