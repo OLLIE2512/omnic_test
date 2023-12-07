@@ -4,8 +4,8 @@ The project **Omnic_test** contains one main component source file in C language
 
 Main task create two tasks:
 
-    Publisher: Increment counter value every 5 seconds, and put it in queue
-    Consumer:  Receive value from queue and log it with timestamp between messages
+* Publisher: Increment counter value every 5 seconds, and put it in queue
+* Consumer:  Receive value from queue and log it with timestamp between messages
 
 Components for customer and publisher tasks located in [components](components) folder. Each component have own folder: [publisher](components/publisher) folder include sources for Publisher task, [consumer](components/consumer) folder include sources for Consumer task.
 
