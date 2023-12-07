@@ -63,4 +63,4 @@ For more information on structure and contents of ESP-IDF projects, please refer
     ```
     idf.py -p PORT flash
     ```
-Replace PORT with your ESP32 board’s USB port name
+Replace PORT with your ESP32 board’s USB port name. After flashing log output will be available on PORT(speed set to 115200b/s).
