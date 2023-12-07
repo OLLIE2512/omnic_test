@@ -1,53 +1,64 @@
-| Supported Targets | ESP32 | ESP32-C2 | ESP32-C3 | ESP32-C6 | ESP32-H2 | ESP32-S2 | ESP32-S3 |
-| ----------------- | ----- | -------- | -------- | -------- | -------- | -------- | -------- |
+## Omnic_test contents
 
-# Hello World Example
+The project **Omnic_test** contains one main component source file in C language [message_box_main.c](main/message_box_main.c). The file is located in folder [main](main).
 
-Starts a FreeRTOS task to print "Hello World".
+Main task create two tasks:
 
-(See the README.md file in the upper level 'examples' directory for more information about examples.)
+    Publisher: Increment counter value every 5 seconds, and put it in queue
+    Consumer:  Receive value from queue and log it with timestamp between messages
 
-## How to use example
+Components for customer and publisher tasks located in [components](components) folder. Each component have own folder: [publisher](components/publisher) folder include sources for Publisher task, [consumer](components/consumer) folder include sources for Consumer task.
 
-Follow detailed instructions provided specifically for this example.
+Omnic_test project based on ESP-IDF SDK v5.12.
 
-Select the instructions depending on Espressif chip installed on your development board:
+ESP-IDF projects are built using CMake. The project build configuration is contained in `CMakeLists.txt` files that provide a set of directives and instructions describing the project's source files and targets (executable, library, or both).
 
-- [ESP32 Getting Started Guide](https://docs.espressif.com/projects/esp-idf/en/stable/get-started/index.html)
-- [ESP32-S2 Getting Started Guide](https://docs.espressif.com/projects/esp-idf/en/latest/esp32s2/get-started/index.html)
-
-
-## Example folder contents
-
-The project **hello_world** contains one source file in C language [hello_world_main.c](main/hello_world_main.c). The file is located in folder [main](main).
-
-ESP-IDF projects are built using CMake. The project build configuration is contained in `CMakeLists.txt` files that provide set of directives and instructions describing the project's source files and targets (executable, library, or both).
-
-Below is short explanation of remaining files in the project folder.
+Below is a short explanation of remaining files in the project folder.
 
 ```
 ├── CMakeLists.txt
-├── pytest_hello_world.py      Python script used for automated testing
 ├── main
+│   ├── include
+│   │   └── message_box_types  This file contains global types defenition
 │   ├── CMakeLists.txt
-│   └── hello_world_main.c
+│   └── message_box_main.c     contains main task
+│
+├── components
+│   ├── consumer
+│   │   ├── include
+│   │   │    └── consumer.h    header file for consumer component
+│   │   ├── CMakeLists.txt
+│   │   └── consumer.c         consuner conponent source file
+│   │ 
+│   └── publisher
+│       ├── include
+│       │    └── publisher.h   header file for publisher component
+│       ├── CMakeLists.txt
+│       └── publisher.c        publisher conponent source file
+│
 └── README.md                  This is the file you are currently reading
 ```
 
 For more information on structure and contents of ESP-IDF projects, please refer to Section [Build System](https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-guides/build-system.html) of the ESP-IDF Programming Guide.
 
-## Troubleshooting
+## Build and flash
+* Please check vendor get started guide: [ESP-IDF Get Started](https://docs.espressif.com/projects/esp-idf/en/v5.1.2/esp32/get-started)
 
-* Program upload failure
+* Download and install ESP IDF
 
-    * Hardware connection is not correct: run `idf.py -p PORT monitor`, and reboot your board to see if there are any output logs.
-    * The baud rate for downloading is too high: lower your baud rate in the `menuconfig` menu, and try again.
+* Clone Omnic test project and set target
+    ```
+    cd ~/omnic_test
+    idf.py set-target esp32
+    ```
 
-## Technical support and feedback
+* Build the project by running:
+    ```
+    idf.py build
+    ```
 
-Please use the following feedback channels:
-
-* For technical queries, go to the [esp32.com](https://esp32.com/) forum
-* For a feature request or bug report, create a [GitHub issue](https://github.com/espressif/esp-idf/issues)
-
-We will get back to you as soon as possible.
+* Flash project by running:
+    ```
+    idf.py -p PORT flash
+    ```
+Replace PORT with your ESP32 board’s USB port name
