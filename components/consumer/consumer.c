@@ -1,8 +1,6 @@
 #include "consumer.h"
 #include "message_box_types.h"
 #include "driver/gptimer.h"
-
-#define LOG_LOCAL_LEVEL ESP_LOG_VERBOSE
 #include "esp_log.h"
 
 static const char *TAG = "Consumer";
